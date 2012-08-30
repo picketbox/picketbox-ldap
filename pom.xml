@@ -22,7 +22,7 @@
    <groupId>org.picketbox</groupId>
    <modelVersion>4.0.0</modelVersion>
    <artifactId>picketbox-ldap</artifactId>
-   <version>1.0.0.Final</version>
+   <version>1.0.1-SNAPSHOT</version>
    <packaging>jar</packaging>
    <name>PicketBox LDAP Server</name>
    <url>http://jboss.org/picketlink/</url>
@@ -110,18 +110,6 @@
          <artifactId>junit</artifactId>
          <version>4.8.1</version>
          <scope>test</scope>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging</artifactId>
-         <version>3.1.0.GA</version>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-processor</artifactId>
-         <version>1.0.0.Final</version>
-         <scope>provided</scope>
-         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.mockito</groupId>
