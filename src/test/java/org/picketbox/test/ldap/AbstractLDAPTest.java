@@ -54,10 +54,11 @@ public class AbstractLDAPTest {
         workDir.mkdirs();
 
         ds = new EmbeddedApacheDS(workDir);
+        ds.disableShutdownhook(); // Verbose
         ds.createBaseDN("apache", "dc=apache,dc=org");
 
         createBaseDN();
-        
+
         long current = System.currentTimeMillis();
         System.out.println("Starting Apache DS server");
         ds.startServer();
@@ -79,23 +80,22 @@ public class AbstractLDAPTest {
             recursiveDeleteDir(workDir);
         }
     }
-    
+
     /**
      * Override to supply your own admin password
+     *
      * @return
      */
-    protected String getAdminPW(){
+    protected String getAdminPW() {
         return "secret";
     }
-    
-    
+
     /**
-     * Mandatory method that needs to be overridden
-     * This class creates a base dn "dc=jboss,dc=org"
-     * 
-     * @throws Exception 
+     * Mandatory method that needs to be overridden This class creates a base dn "dc=jboss,dc=org"
+     *
+     * @throws Exception
      */
-    protected void createBaseDN() throws Exception{ 
+    protected void createBaseDN() throws Exception {
         ds.createBaseDN("jboss", "dc=jboss,dc=org");
     }
 

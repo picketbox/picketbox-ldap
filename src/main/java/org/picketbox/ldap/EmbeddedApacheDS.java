@@ -93,6 +93,13 @@ public class EmbeddedApacheDS {
     }
 
     /**
+     * Disable the shutdownhook. Can be very verbose for unit testing.
+     */
+    public void disableShutdownhook() {
+        service.setShutdownHookEnabled(false);
+    }
+
+    /**
      * Add a new partition to the server
      *
      * @param partitionId The partition Id
