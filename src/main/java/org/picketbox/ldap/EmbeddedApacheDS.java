@@ -61,6 +61,9 @@ public class EmbeddedApacheDS {
     private LdapServer server;
 
     public EmbeddedApacheDS(File workDir) throws Exception {
+        if(workDir == null){
+            throw new IllegalArgumentException("workDir is null");
+        }
         // Initialize the LDAP service
         service = new DefaultDirectoryService();
         service.setWorkingDirectory(workDir);

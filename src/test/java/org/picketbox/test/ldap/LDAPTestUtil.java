@@ -26,17 +26,15 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.io.InputStream;
 
-import org.junit.After;
-import org.junit.Before;
 import org.picketbox.ldap.EmbeddedApacheDS;
 
 /**
- * Base class for ldap tests
+ * Utility class for ldap tests that cannot subclass {@link AbstractLDAPTest}
  *
  * @author anil saldhana
  * @since Jul 20, 2012
  */
-public class AbstractLDAPTest {
+public class LDAPTestUtil {
     protected String adminPW = "secret";
     protected String dn = "dc=jboss,dc=org";
     protected String adminDN = "uid=admin,ou=system";
@@ -46,7 +44,6 @@ public class AbstractLDAPTest {
 
     protected EmbeddedApacheDS ds = null;
 
-    @Before
     public void setup() throws Exception {
         String tempDir = System.getProperty("java.io.tmpdir");
 
@@ -66,9 +63,7 @@ public class AbstractLDAPTest {
         System.out.println("Time taken = " + (System.currentTimeMillis() - current) + "milisec");
     }
 
-    @After
     public void tearDown() throws Exception {
-        System.out.println("AbstractLDAPTest:tearDown");
         if (ds != null) {
             ds.stopServer();
         }
@@ -80,6 +75,16 @@ public class AbstractLDAPTest {
         if (workDir != null) {
             recursiveDeleteDir(workDir);
         }
+    }
+    
+    /**
+     * Create a base DN
+     * @param partitionName
+     * @param dn
+     * @throws Exception
+     */
+    public void createBaseDN(String partitionName, String dn) throws Exception{
+        ds.createBaseDN(partitionName, dn);
     }
 
     /**
@@ -100,7 +105,7 @@ public class AbstractLDAPTest {
         ds.createBaseDN("jboss", "dc=jboss,dc=org");
     }
 
-    protected void importLDIF(String fileName) throws Exception {
+    public void importLDIF(String fileName) throws Exception {
         long current = System.currentTimeMillis();
         System.out.println("Going to import LDIF:" + fileName);
         InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
