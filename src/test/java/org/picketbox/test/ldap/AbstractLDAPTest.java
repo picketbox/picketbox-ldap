@@ -51,6 +51,11 @@ public class AbstractLDAPTest {
         String tempDir = System.getProperty("java.io.tmpdir");
 
         File workDir = new File(tempDir + "/server-work");
+
+        // On Windows, the directory may not be fully deleted from previous test
+        if (workDir.exists()) {
+            recursiveDeleteDir(workDir);
+        }
         workDir.mkdirs();
 
         ds = new EmbeddedApacheDS(workDir);
